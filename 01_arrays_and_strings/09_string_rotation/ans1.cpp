@@ -1,41 +1,39 @@
 /*
- * Concat
- * Time complexity: O(1) but isSubstring() runs in O(n)
- * Space Complexity: O(n)
+ * N: the length of the string
+ * Time complexity: O(1) but isSubstring() needs O(N)
+ * Space Complexity: O(N)
  */
 
-#include<iostream>
-#include<string>
-#include<vector>
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-class Solution {
-public:
-	bool stringRotation(const string &s1, const string &s2) {
-		if (s1.length() != s2.length()) return false;
+bool isSubstring(const string &substr, const string &mainstr) {
+	if (mainstr.find(substr) == string::npos)
+		return false;
+	else
+		return true;
+}
 
-		const string s1s1 = s1 + s1;
-		return isSubstring(s2, s1s1);
-	}
+bool stringRotation(const string &s1, const string &s2) {
+	if (s1.length() != s2.length())
+		return false;
 
-private:
-	bool isSubstring(const string &substr, const string &mainstr) {
-		if (mainstr.find(substr) == string::npos) return false;
-		else return true;
-	}
-};
+	const string s1s1 = s1 + s1;
+	return isSubstring(s2, s1s1);
+}
 
 int main(void) {
-	Solution solution;
 	vector<pair<string, string>> inputs({
 		{"waterbottle", "erbottlewat"},
 		{"waterbottle", "erbbottlewat"},
 		{"waterbottle", "erbattlewat"}
 	});
 
-	for (const auto &input : inputs) {
-		cout << input.first << ", " << input.second << ": " << solution.stringRotation(input.first, input.second) << endl;
-	}
+	for (const auto &i : inputs)
+		cout << i.first << ", " << i.second << ": " << stringRotation(i.first, i.second) << endl;
+
 	return 0;
 }
