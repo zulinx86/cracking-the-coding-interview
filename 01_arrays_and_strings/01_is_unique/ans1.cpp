@@ -1,5 +1,5 @@
 /*
- * N: length of a given string
+ * N: the length of the given string
  * Time complexity: O(N^2)
  * Space complexity: O(1)
  */
