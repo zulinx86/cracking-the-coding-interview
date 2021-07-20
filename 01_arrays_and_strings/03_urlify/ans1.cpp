@@ -4,9 +4,9 @@
  * Space complexity: O(1)
  */
 
-#include<iostream>
-#include<vector>
-#include<string>
+#include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
