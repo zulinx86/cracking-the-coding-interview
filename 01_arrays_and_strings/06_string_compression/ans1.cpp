@@ -1,3 +1,9 @@
+/*
+ * N: the length of the given string
+ * Time complexity: O(N)
+ * Space complexity: O(N)
+ */
+
 #include <iostream>
 #include <string>
 #include <vector>
