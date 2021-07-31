@@ -11,34 +11,39 @@
 
 using namespace std;
 
-bool checkPermutation(string& s1, string& s2) {
+bool checkPermutation(const string &s1, const string &s2)
+{
+	int count[256] = {0};
+
 	if (s1.length() != s2.length())
 		return false;
 
-	int count[256] = {0};
 	for (auto s : s1)
 		++count[s];
 	for (auto s : s2)
 		--count[s];
 
-	for (int i = 0; i < 256; ++i)
+	for (int i = 0; i < 256; ++i) {
 		if (count[i] != 0)
 			return false;
+	}
 
 	return true;
 }
 
-int main(void) {
+int main(void)
+{
 	vector<pair<string, string>> inputs({
 		{"abcdefg", "cedfgba"},	// true
 		{"abcdefg", "adsfasd"},	// false
 		{"aabbccc", "aabcbcc"},	// true
 		{"aabbccc", "aabaccc"},	// false
-		{"aaa", "aaaa"},		// false
+		{"aaa", "aaaa"},	// false
 	});
 
 	for (auto i : inputs)
-		cout << i.first << ", " << i.second << ": " << checkPermutation(i.first, i.second) << endl;
+		cout << i.first << ", " << i.second << ": " <<
+			checkPermutation(i.first, i.second) << endl;
 
 	return 0;
 }

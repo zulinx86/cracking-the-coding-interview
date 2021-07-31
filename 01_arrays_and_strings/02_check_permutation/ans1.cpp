@@ -11,16 +11,19 @@
 
 using namespace std;
 
-bool checkPermutation(string s1, string s2) {
+bool checkPermutation(string s1, string s2)
+{
 	if (s1.length() != s2.length())
 		return false;
 
 	sort(s1.begin(), s1.end());
 	sort(s2.begin(), s2.end());
+
 	return s1 == s2;
 }
 
-int main(void) {
+int main(void)
+{
 	vector<pair<string, string>> inputs({
 		{"abcdefg", "cedfgba"},	// true
 		{"abcdefg", "adsfasd"},	// false
@@ -30,7 +33,8 @@ int main(void) {
 	});
 
 	for (auto i : inputs)
-		cout << i.first << ", " << i.second << ": " << checkPermutation(i.first, i.second) << endl;
+		cout << i.first << ", " << i.second << ": " <<
+			checkPermutation(i.first, i.second) << endl;
 
 	return 0;
 }
