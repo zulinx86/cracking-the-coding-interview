@@ -11,11 +11,12 @@
 using namespace std;
 
 bool isUnique(const string& str) {
-	bool check[256] = { false };
+	if (str.length() > 256) return false;
 
+	bool flags[256] = { false };
 	for (int i = 0; i < str.length(); ++i) {
-		if (check[str[i]]) return false;
-		check[str[i]] = true;
+		if (flags[str[i]]) return false;
+		flags[str[i]] = true;
 	}
 
 	return true;
