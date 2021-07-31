@@ -10,9 +10,11 @@
 
 using namespace std;
 
-void urlify(string &str, int length) {
-	int p = str.length() - 1;
-	for (int i = length - 1; i >= 0; --i) {
+void urlify(string &str, int length)
+{
+	int i, p = str.length() - 1;
+
+	for (i = length - 1; i >= 0; --i) {
 		if (str[i] == ' ') {
 			str[p--] = '0';
 			str[p--] = '2';
@@ -29,10 +31,10 @@ int main(void) {
 		{"Hello world  ", 11}
 	});
 
-	for (int i = 0; i < inputs.size(); ++i) {
-		cout << inputs[i].first << ": ";
-		urlify(inputs[i].first, inputs[i].second);
-		cout << inputs[i].first << endl;
+	for (auto i : inputs) {
+		cout << i.first << ": ";
+		urlify(i.first, i.second);
+		cout << i.first << endl;
 	}
 
 	return 0;
