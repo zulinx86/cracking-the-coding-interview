@@ -12,13 +12,11 @@ using namespace std;
 
 bool isUnique(const string &str)
 {
-	int i;
-	bool flags[256] = { false };
-
 	if (str.length() > 256)
 		return false;
 
-	for (i = 0; i < str.length(); ++i) {
+	bool flags[256] = { false };
+	for (int i = 0; i < str.length(); ++i) {
 		if (flags[str[i]])
 			return false;
 
@@ -30,11 +28,10 @@ bool isUnique(const string &str)
 
 int main(void)
 {
-	int i;
 	vector<string> inputs({"hello", "world"});
 
-	for (i = 0; i < inputs.size(); ++i)
-		cout << inputs[i] << ": " << isUnique(inputs[i]) << endl;
+	for (auto i : inputs)
+		cout << i << ": " << isUnique(i) << endl;
 
 	return 0;
 }

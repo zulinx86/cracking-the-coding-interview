@@ -12,9 +12,9 @@ using namespace std;
 
 void urlify(string &str, int length)
 {
-	int i, p = str.length() - 1;
+	int p = str.length() - 1;
 
-	for (i = length - 1; i >= 0; --i) {
+	for (int i = length - 1; i >= 0; --i) {
 		if (str[i] == ' ') {
 			str[p--] = '0';
 			str[p--] = '2';

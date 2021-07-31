@@ -12,7 +12,7 @@ using namespace std;
 
 string stringCompression(const string &str)
 {
-	string compressed;
+	int len = 0;
 
 	for (int i = 0; i < str.length(); ++i) {
 		char c = str[i];
@@ -23,12 +23,31 @@ string stringCompression(const string &str)
 			++i;
 		}
 
-		compressed += c + to_string(cnt);
+		int len_cnt = 1;
+		while (cnt /= 10)
+			++len_cnt;
+
+		len += len_cnt + 1;
 	}
 
-	if (compressed.length() < str.length())
-		return compressed;
-	
+	if (len < str.length()) {
+		string result;
+		result.reserve(len);
+
+		for (int i = 0; i < str.length(); ++i) {
+			char c = str[i];
+			int cnt = 1;
+
+			while (i + 1 != str.length() && str[i + 1] == c) {
+				++cnt;
+				++i;
+			}
+
+			result += c + to_string(cnt);
+		}
+		return result;
+	}
+
 	return str;
 }
 

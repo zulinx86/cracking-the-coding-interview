@@ -10,7 +10,8 @@
 
 using namespace std;
 
-bool oneAway(const string &s1, const string& s2) {
+bool oneAway(const string &s1, const string &s2)
+{
 	const string *t1, *t2;
 	if (s1.length() > s2.length())
 		t1 = &s1, t2 = &s2;
@@ -21,7 +22,6 @@ bool oneAway(const string &s1, const string& s2) {
 
 	int i1 = 0, i2 = 0;
 	bool hasDiff = false;
-	
 	while (i1 < t1->length() && i2 < t2->length()) {
 		if ((*t1)[i1] != (*t2)[i2]) {
 			if (hasDiff)
@@ -40,7 +40,8 @@ bool oneAway(const string &s1, const string& s2) {
 }
 
 
-int main(void) {
+int main(void)
+{
 	vector<pair<string, string>> inputs({
 		{"pale", "ple"},
 		{"pales", "pale"},

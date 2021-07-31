@@ -8,7 +8,8 @@
 #include <vector>
 using namespace std;
 
-void rotateMatrix(vector<vector<int>> &mat) {
+void rotateMatrix(vector<vector<int>> &mat)
+{
 	int n = mat.size();
 
 	for (int l = 0; l < n / 2; ++l) {
@@ -23,7 +24,8 @@ void rotateMatrix(vector<vector<int>> &mat) {
 	}
 }
 
-void showMatrix(const vector<vector<int>> &mat) {
+void showMatrix(const vector<vector<int>> &mat)
+{
 	for (int i = 0; i < mat.size(); ++i) {
 		for (int j = 0; j < mat[i].size(); ++j) {
 			printf("%02d ", mat[i][j]);
@@ -34,7 +36,8 @@ void showMatrix(const vector<vector<int>> &mat) {
 }
 
 
-int main(void) {
+int main(void)
+{
 	vector<vector<vector<int>>> inputs({
 		{
 			{ 0,  1,  2,  3,  4},

@@ -11,15 +11,16 @@
 
 using namespace std;
 
-bool palindromePermutation(string str) {
-	int bitVec = 0;
+bool palindromePermutation(string str)
+{
+	unsigned int bitVec = 0;
 
 	for (int i = 0; i < str.length(); ++i) {
 		char c = tolower(str[i]);
 		if (c == ' ')
 			continue;
 
-		int mask = 1 << c - 'a';
+		unsigned int mask = 1 << c - 'a';
 		if (mask & bitVec)
 			bitVec &= ~mask;
 		else
@@ -30,7 +31,8 @@ bool palindromePermutation(string str) {
 }
 
 
-int main(void) {
+int main(void)
+{
 	vector<string> inputs({"Tact Coa", "Hello World", "aabbcc"});
 
 	for (auto i : inputs)

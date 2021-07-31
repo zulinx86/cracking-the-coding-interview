@@ -10,7 +10,8 @@
 
 using namespace std;
 
-bool oneAway(const string &s1, const string& s2) {
+bool oneAway(const string &s1, const string &s2)
+{
 	const string *t1, *t2;
 	if (s1.length() > s2.length())
 		t1 = &s1, t2 = &s2;
@@ -44,7 +45,8 @@ bool oneAway(const string &s1, const string& s2) {
 }
 
 
-int main(void) {
+int main(void)
+{
 	vector<pair<string, string>> inputs({
 		{"pale", "ple"},
 		{"pales", "pale"},
@@ -53,7 +55,8 @@ int main(void) {
 	});
 
 	for (auto i : inputs)
-		cout << i.first << ", " << i.second << ": " << oneAway(i.first, i.second) << endl;
+		cout << i.first << ", " << i.second << ": " <<
+			oneAway(i.first, i.second) << endl;
 
 	return 0;
 }

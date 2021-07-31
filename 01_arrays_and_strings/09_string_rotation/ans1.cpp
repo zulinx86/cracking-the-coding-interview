@@ -1,6 +1,6 @@
 /*
  * N: the length of the string
- * Time complexity: O(1) but isSubstring() needs O(N)
+ * Time complexity: O(1) but isSubstring() needs O(N^2)
  * Space Complexity: O(N)
  */
 
@@ -10,14 +10,16 @@
 
 using namespace std;
 
-bool isSubstring(const string &substr, const string &mainstr) {
+bool isSubstring(const string &substr, const string &mainstr)
+{
 	if (mainstr.find(substr) == string::npos)
 		return false;
 	else
 		return true;
 }
 
-bool stringRotation(const string &s1, const string &s2) {
+bool stringRotation(const string &s1, const string &s2)
+{
 	if (s1.length() != s2.length())
 		return false;
 
@@ -25,7 +27,8 @@ bool stringRotation(const string &s1, const string &s2) {
 	return isSubstring(s2, s1s1);
 }
 
-int main(void) {
+int main(void)
+{
 	vector<pair<string, string>> inputs({
 		{"waterbottle", "erbottlewat"},
 		{"waterbottle", "erbbottlewat"},

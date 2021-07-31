@@ -11,7 +11,8 @@
 
 using namespace std;
 
-bool palindromePermutation(string str) {
+bool palindromePermutation(string str)
+{
 	unordered_map<char, int> mp;
 	int cnt = 0;
 
@@ -31,7 +32,8 @@ bool palindromePermutation(string str) {
 	return cnt <= 1;
 }
 
-int main(void) {
+int main(void)
+{
 	vector<string> inputs({"Tact Coa", "Hello World", "aabbcc"});
 
 	for (auto i : inputs)

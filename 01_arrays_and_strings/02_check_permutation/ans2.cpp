@@ -13,11 +13,10 @@ using namespace std;
 
 bool checkPermutation(const string &s1, const string &s2)
 {
-	int count[256] = {0};
-
 	if (s1.length() != s2.length())
 		return false;
 
+	int count[256] = {0};
 	for (auto s : s1)
 		++count[s];
 	for (auto s : s2)

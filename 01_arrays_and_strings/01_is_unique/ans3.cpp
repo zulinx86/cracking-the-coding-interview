@@ -25,11 +25,10 @@ bool isUnique(const string &str)
 
 int main(void)
 {
-	int i;
 	vector<string> inputs({"hello", "world"});
 
-	for (i = 0; i < inputs.size(); ++i)
-		cout << inputs[i] << ": " << isUnique(inputs[i]) << endl;
+	for (auto i : inputs)
+		cout << i << ": " << isUnique(i) << endl;
 
 	return 0;
 }
