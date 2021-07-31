@@ -1,36 +1,46 @@
 /*
- * Support that you don't know the length of the given list
- *
  * N: the length of the given list
  * Time complexity: O(N)
- * Space complexity: O(1)
+ * Space complexity: O(N)
  */
 
 #include <cstdlib>
 #include <iostream>
-#include <list> 
+#include <forward_list> 
 #include <vector>
 
 using namespace std;
 
-int returnKthToLast(const list<int> &l, unsigned int k)
+forward_list<int>::const_iterator subReturnKthToLast(
+	forward_list<int>::const_iterator itr,
+	const forward_list<int>::const_iterator end,
+	unsigned int k, int &cnt)
 {
-	int len = 0;
-	for (auto itr = l.cbegin(); itr != l.cend(); ++itr, ++len) {}
-	if (k >= len) {
-		cerr << endl << "invalid k value: " << k << endl;
+	if (itr == end)
+		return end;
+
+	auto i = itr;
+	i = subReturnKthToLast(++i, end, k, cnt);
+
+	++cnt;
+	if (cnt == k)
+		return itr;
+	
+	return i;
+}
+
+int returnKthToLast(const forward_list<int> &l, unsigned int k)
+{
+	int cnt = -1;
+	auto itr = subReturnKthToLast(l.cbegin(), l.cend(), k, cnt);
+	if (itr == l.cend()) {
+		cout << endl << "invalid k value: " << k << endl;
 		exit(1);
 	}
-
-	unsigned int last_k = len - k - 1;
-	auto itr = l.cbegin();
-
-	for (unsigned int i = 0; i < last_k; ++i, ++itr) {}
-
 	return *itr;
 }
 
-void showList(const list<int> &l)
+void showList(const forward_list<int> &l)
 {
 	cout << "[ ";
 	for (auto i : l)
@@ -40,7 +50,7 @@ void showList(const list<int> &l)
 
 int main(void)
 {
-	list<int> l{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	forward_list<int> l{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 	vector<unsigned int> inputs({3, 0, 9, 10});
 	
 	showList(l);
