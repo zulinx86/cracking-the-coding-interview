@@ -10,7 +10,7 @@
 
 using namespace std;
 
-bool isUnique(const string& str) {
+bool isUnique(const string &str) {
 	int checker = 0;
 	for (int i = 0; i < str.length(); ++i) {
 		if (checker & (1 << str[i])) return false;

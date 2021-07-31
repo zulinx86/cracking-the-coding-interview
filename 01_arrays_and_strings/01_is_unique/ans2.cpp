@@ -10,7 +10,7 @@
 
 using namespace std;
 
-bool isUnique(const string& str) {
+bool isUnique(const string &str) {
 	if (str.length() > 256) return false;
 
 	bool flags[256] = { false };
