@@ -12,23 +12,19 @@ using namespace std;
 
 void partition(list<int> &l, int pivot)
 {
-	auto front = l.begin(), back = --l.end();
-	while (front != back) {
-		while (*front < pivot && front != back)
-			++front;
-
-		while (*back >= pivot && back != front)
-			--back;
-
-		int buf = *front;
-		*front = *back;
-		*back = buf;
+	for (auto itr = l.begin(); itr != l.cend();) {
+		if (*itr < pivot) {
+			l.push_front(*itr);
+			itr = l.erase(itr);
+		} else {
+			++itr;
+		}
 	}
 }
 
 void showList(const list<int> &l)
 {
-	for (auto i : l)
+	for (int i : l)
 		cout << i << " ";
 	cout << endl;
 }
@@ -37,14 +33,14 @@ int main(void)
 {
 	vector<pair<list<int>, int>> inputs({
 		{{3, 5, 8, 5, 10, 2, 1}, 5},
-		{{3, 5, 8, 5, 10, 2, 1}, 3}
+		{{3, 5, 8, 5, 10, 2, 1}, 8}
 	});
 
 	for (auto i : inputs) {
 		cout << "input: ";
 		showList(i.first);
 		cout << "pivot: " << i.second << endl;
-		
+
 		partition(i.first, i.second);
 
 		cout << "output: ";
