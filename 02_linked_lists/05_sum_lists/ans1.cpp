@@ -1,3 +1,9 @@
+/*
+ * N: the number of digits for the larger value
+ * Time complexity: O(N)
+ * Space complexity: O(1)
+ */
+
 #include <iostream>
 #include <vector>
 #include <list>
