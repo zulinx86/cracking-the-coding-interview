@@ -6,9 +6,8 @@ EXECFILES := $(patsubst %.cpp,%,$(wildcard *.cpp))
 all:
 	make $(EXECFILES)
 
-
 %: %.cpp
-	$(CXX) $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $@
 
 .PHONY: clean
 clean:
