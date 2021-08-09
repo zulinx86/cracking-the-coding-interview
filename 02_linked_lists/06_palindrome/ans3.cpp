@@ -12,48 +12,39 @@
 using namespace std;
 
 bool palindromeSub(
-	_Fwd_list_node_base **forward,
-	_Fwd_list_node_base *backward)
+	forward_list<int>::const_iterator &forward,
+	forward_list<int>::const_iterator backward)
 {
-	if (backward == 0)
+	if (backward._M_node == 0)
 		return true;
-	
-	bool ret = palindromeSub(
-		forward,
-		backward->_M_next
-	);
+
+	forward_list<int>::const_iterator tmp = backward;
+	bool ret = palindromeSub(forward, ++tmp);
 
 	if (!ret)
 		return false;
 
-	int fval = *(static_cast<_Fwd_list_node<int> *>(*forward)->_M_valptr());
-	int bval = *(static_cast<_Fwd_list_node<int> *>(backward)->_M_valptr());
-
-	if (fval != bval)
+	if (*forward != *backward)
 		return false;
-	
-	*forward = (*forward)->_M_next;
+
+	++forward;
 
 	return true;
 }
 
-
-bool palindrome(forward_list<int> &l)
+bool palindrome(const forward_list<int> &l)
 {
-	bool ret = palindromeSub(
-		&(l.begin()._M_node),
-		l.begin()._M_node
-	);
+	forward_list<int>::const_iterator head = l.cbegin();
+
+	bool ret = palindromeSub(head, head);
 
 	return ret;
 }
 
-void showList(const _Fwd_list_node<int> *node)
+void showList(const forward_list<int> &l)
 {
-	while (node != 0) {
-		cout << *(node->_M_valptr());
-		node = static_cast<const _Fwd_list_node<int> *>(node->_M_next);
-	}
+	for (auto i : l)
+		cout << i;
 	return;
 }
 
@@ -67,7 +58,7 @@ int main(void)
 	});
 
 	for (auto i : inputs) {
-		showList(static_cast<const _Fwd_list_node<int> *>(i.cbegin()._M_node));
+		showList(i);
 		cout << ": " << palindrome(i) << endl;
 	}
 	

@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -fpermissive
+CXXFLAGS = -Wall
 EXECFILES := $(patsubst %.cpp,%,$(wildcard *.cpp))
 
 .PHONY: all
