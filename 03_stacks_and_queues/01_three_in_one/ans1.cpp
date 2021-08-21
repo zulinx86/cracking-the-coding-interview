@@ -52,7 +52,7 @@ public:
 
 	void print_err_msg(string msg, string func)
 	{
-		cerr << msg << " in ThreeStacksInSingleArray." << __func__ << "()" << endl;
+		cerr << msg << " in ThreeStacksInSingleArray." << func << "()" << endl;
 		exit(1);
 	}
 
