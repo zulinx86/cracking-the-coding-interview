@@ -49,6 +49,13 @@ public:
 		_p[i]--;
 		return _arr[_p[i]];
 	}
+	
+	void debug(void)
+	{
+		for (unsigned int i = 0; i < 3 * _n; ++i)
+			cout << _arr[i] << " ";
+		cout << endl;
+	}
 
 private:
 	void print_err_msg(string msg, string func)
@@ -87,5 +94,8 @@ int main(void)
 		} else {
 			cout << "invalid action" << endl;
 		}
+
+		cout << "debug: ";
+		stacks.debug();
 	}
 }
