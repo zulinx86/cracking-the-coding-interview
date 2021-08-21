@@ -30,13 +30,15 @@ public:
 
 	void push(unsigned int i, T val)
 	{
+		unsigned int next = (i + 1) % 3;
+
 		if (i >= 3) {
 			print_err_msg("invalid index", __func__);
 			return;
 		}
 
-		if (_p[i] == _s[(i + 1) % 3]) {
-			if (!move((i + 1) % 3)) {
+		if (_p[i] == _s[next]) {
+			if (!move(next, next)) {
 				print_err_msg("stack overflow", __func__);
 				return;
 			}
@@ -103,11 +105,17 @@ private:
 			return (p1 + 3 * _n) - p2;
 	}
 
-	bool move(unsigned int i)
+	bool move(unsigned int i, unsigned int start)
 	{
 		unsigned int next = (i + 1) % 3;
-		if (_p[i] == _s[next])
-			return false;
+
+		if (_p[i] == _s[next]) {
+			if ((next + 1) % 3 == start)
+				return false;
+
+			if (!move(next, start))
+				return false;
+		}
 
 		unsigned int d = (sub(_s[next], dec(_p[i])) + 1) / 2;
 
@@ -116,8 +124,8 @@ private:
 			_arr[p] = 0;
 		}
 
-		_s[i] = add(_s[i], d) % (3 * _n);
-		_p[i] = add(_p[i], d) % (3 * _n);
+		_s[i] = add(_s[i], d);
+		_p[i] = add(_p[i], d);
 		return true;
 	}
 
