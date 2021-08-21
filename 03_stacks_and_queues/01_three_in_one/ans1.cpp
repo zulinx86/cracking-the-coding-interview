@@ -50,13 +50,13 @@ public:
 		return _arr[_p[i]];
 	}
 
+private:
 	void print_err_msg(string msg, string func)
 	{
 		cerr << msg << " in ThreeStacksInSingleArray." << func << "()" << endl;
 		exit(1);
 	}
 
-private:
 	unsigned int _n;
 	T *_arr;
 	unsigned int _p[3];
