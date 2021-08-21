@@ -30,11 +30,17 @@ public:
 
 	void push(unsigned int i, T val)
 	{
-		if (i >= 3)
+		if (i >= 3) {
 			print_err_msg("invalid index", __func__);
+			return;
+		}
 
-		if (_p[i] == _s[(i + 1) % 3])
-			move((i + 1) % 3);
+		if (_p[i] == _s[(i + 1) % 3]) {
+			if (!move((i + 1) % 3)) {
+				print_err_msg("stack overflow", __func__);
+				return;
+			}
+		}
 
 		_arr[_p[i]] = val;
 		_p[i] = inc(_p[i]);
@@ -42,15 +48,21 @@ public:
 
 	T pop(unsigned int i)
 	{
-		if (i >= 3)
+		if (i >= 3) {
 			print_err_msg("invalid index", __func__);
+			return T();
+		}
 
-		if (_p[i] == _s[i])
+		if (_p[i] == _s[i]) {
 			print_err_msg("stack underflow", __func__);
+			return T();
+		}
 
-		_arr[_p[i]] = 0;
 		_p[i] = dec(_p[i]);
-		return _arr[_p[i]];
+
+		T ans = _arr[_p[i]];
+		_arr[_p[i]] = T();
+		return ans;
 	}
 
 	void debug(void)
@@ -91,11 +103,11 @@ private:
 			return (p1 + 3 * _n) - p2;
 	}
 
-	void move(unsigned int i)
+	bool move(unsigned int i)
 	{
 		unsigned int next = (i + 1) % 3;
 		if (_p[i] == _s[next])
-			print_err_msg("stack overflow", __func__);
+			return false;
 
 		unsigned int d = (sub(_s[next], dec(_p[i])) + 1) / 2;
 
@@ -106,12 +118,12 @@ private:
 
 		_s[i] = add(_s[i], d) % (3 * _n);
 		_p[i] = add(_p[i], d) % (3 * _n);
+		return true;
 	}
 
 	void print_err_msg(string msg, string func)
 	{
 		cerr << msg << " in ThreeStacksInSingleArray." << func << "()" << endl;
-		exit(1);
 	}
 
 	unsigned int _n;
@@ -128,7 +140,7 @@ int main(void)
 
 	ThreeStacksInSingleArray<int> stacks(size);
 
-	int a, i, val;
+	int a, i;
 	while (1) {
 		cout << endl << "select action (0 => push, 1 => pop): ";
 		cin >> a;
@@ -137,9 +149,7 @@ int main(void)
 		cin >> i;
 
 		if (a == 0) { // push
-			cout << "input value: ";
-			cin >> val;
-			stacks.push(i, val);
+			stacks.push(i, i + 1);
 		} else if (a == 1) { // pop
 			cout << "poped value is " << stacks.pop(i) << endl;
 		} else {

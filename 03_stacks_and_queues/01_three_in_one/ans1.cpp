@@ -28,11 +28,15 @@ public:
 
 	void push(unsigned int i, T val)
 	{
-		if (i >= 3)
+		if (i >= 3) {
 			print_err_msg("invalid index", __func__);
+			return;
+		}
 
-		if (_p[i] == (i + 1) * _n)
+		if (_p[i] == (i + 1) * _n) {
 			print_err_msg("stack overflow", __func__);
+			return;
+		}
 
 		_arr[_p[i]] = val;
 		_p[i]++;
@@ -40,14 +44,21 @@ public:
 
 	T pop(unsigned int i)
 	{
-		if (i >= 3)
+		if (i >= 3) {
 			print_err_msg("invalid index", __func__);
+			return T();
+		}
 
-		if (_p[i] == i * _n)
+		if (_p[i] == i * _n) {
 			print_err_msg("stack underflow", __func__);
-
+			return T();
+		}
+		
 		_p[i]--;
-		return _arr[_p[i]];
+		
+		T ans = _arr[_p[i]];
+		_arr[_p[i]] = T();
+		return ans;
 	}
 	
 	void debug(void)
@@ -61,7 +72,6 @@ private:
 	void print_err_msg(string msg, string func)
 	{
 		cerr << msg << " in ThreeStacksInSingleArray." << func << "()" << endl;
-		exit(1);
 	}
 
 	unsigned int _n;
@@ -77,7 +87,7 @@ int main(void)
 
 	ThreeStacksInSingleArray<int> stacks(size);
 
-	int a, i, val;
+	int a, i;
 	while (1) {
 		cout << endl << "select action (0 => push, 1 => pop): ";
 		cin >> a;
@@ -86,9 +96,7 @@ int main(void)
 		cin >> i;
 
 		if (a == 0) { // push
-			cout << "input value: ";
-			cin >> val;
-			stacks.push(i, val);
+			stacks.push(i, i + 1);
 		} else if (a == 1) { // pop
 			cout << "poped value is " << stacks.pop(i) << endl;
 		} else {
