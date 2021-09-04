@@ -4,7 +4,8 @@
 
 using namespace std;
 
-void sort_stack(stack<int> &s) {
+void sort_stack(stack<int> &s)
+{
 	stack<int> tmp;
 
 	while (!s.empty()) {
