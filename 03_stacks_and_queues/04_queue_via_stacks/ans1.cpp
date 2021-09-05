@@ -9,11 +9,13 @@ public:
 	queue_via_stacks() {}
 	~queue_via_stacks() {}
 
-	void push(T val) {
+	void push(T val)
+	{
 		s_new.push(val);
 	}
 
-	void pop() {
+	void pop()
+	{
 		if (s_old.empty())
 			shift();
 		
@@ -23,7 +25,8 @@ public:
 		s_old.pop();
 	}
 
-	T top() {
+	T top()
+	{
 		if (s_old.empty())
 			shift();
 
@@ -34,7 +37,8 @@ public:
 	}
 
 private:
-	void shift() {
+	void shift()
+	{
 		while(!s_new.empty()) {
 			s_old.push(s_new.top());
 			s_new.pop();
