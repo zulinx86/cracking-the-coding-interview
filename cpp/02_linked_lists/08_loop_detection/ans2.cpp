@@ -12,7 +12,8 @@ struct node {
 	int val;
 };
 
-struct node *loopDetection(struct node *head) {
+struct node *loopDetection(struct node *head)
+{
 	struct node *fast = head, *slow = head;
 
 	do {
