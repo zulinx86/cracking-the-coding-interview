@@ -7,11 +7,11 @@ fn is_unique(s: &str) -> bool {
 
     let mut bit_for_check: u128 = 0;
     for c in s.chars() {
-        if (bit_for_check & (1 << c as u32)) != 0 {
+        if (bit_for_check & (1u128 << (c as u8))) != 0 {
             return false
         }
 
-        bit_for_check |= 1 << c as u32;
+        bit_for_check |= 1u128 << (c as u8);
     }
 
     true
