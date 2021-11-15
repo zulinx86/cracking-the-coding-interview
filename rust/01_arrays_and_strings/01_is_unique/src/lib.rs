@@ -107,11 +107,16 @@ pub fn is_unique_5(s: &str) -> bool {
 mod tests {
     use super::*;
 
-    fn gen_test_cases() -> [(&'static str, bool); 3] {
+    struct TestCase {
+        input: &'static str,
+        output: bool,
+    }
+
+    fn gen_test_cases() -> [TestCase; 3] {
         return [
-            ("hello", false), /* becuase 'l' is duplicate */
-            ("world", true),
-            ("a b c", false), /* because ' ' is duplicate */
+            TestCase { input: "hello", output: false }, /* becuase 'l' is duplicate */
+            TestCase { input: "world", output: true },
+            TestCase { input: "a b c", output: false }, /* because ' ' is duplicate */
         ];
     }
 
@@ -119,8 +124,8 @@ mod tests {
     fn test_is_unique_1() {
         let test_cases = gen_test_cases();
 
-        for case in test_cases {
-            assert_eq!(is_unique_1(case.0), case.1);
+        for c in test_cases {
+            assert_eq!(is_unique_1(c.input), c.output);
         }
     }
 
@@ -128,8 +133,8 @@ mod tests {
     fn test_is_unique_2() {
         let test_cases = gen_test_cases();
 
-        for case in test_cases {
-            assert_eq!(is_unique_2(case.0), case.1);
+        for c in test_cases {
+            assert_eq!(is_unique_2(c.input), c.output);
         }
     }
 
@@ -137,8 +142,8 @@ mod tests {
     fn test_is_unique_3() {
         let test_cases = gen_test_cases();
 
-        for case in test_cases {
-            assert_eq!(is_unique_3(case.0), case.1);
+        for c in test_cases {
+            assert_eq!(is_unique_3(c.input), c.output);
         }
     }
 
@@ -146,8 +151,8 @@ mod tests {
     fn test_is_unique_4() {
         let test_cases = gen_test_cases();
 
-        for case in test_cases {
-            assert_eq!(is_unique_4(case.0), case.1);
+        for c in test_cases {
+            assert_eq!(is_unique_4(c.input), c.output);
         }
     }
 
@@ -155,8 +160,8 @@ mod tests {
     fn test_is_unique_5() {
         let test_cases = gen_test_cases();
 
-        for case in test_cases {
-            assert_eq!(is_unique_5(case.0), case.1);
+        for c in test_cases {
+            assert_eq!(is_unique_5(c.input), c.output);
         }
     }
 }
