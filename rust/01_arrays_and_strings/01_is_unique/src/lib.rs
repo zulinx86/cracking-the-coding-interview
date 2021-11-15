@@ -81,6 +81,23 @@ pub fn is_unique_4(s: &str) -> bool {
     true
 }
 
+/// Sorts a given string and compares adjacent characters.
+///
+/// - Time complexity: O(N log N)
+/// - Space complexity: O(N)
+pub fn is_unique_5(s: &str) -> bool {
+    let mut s: Vec<_> = s.chars().collect();
+    s.sort();
+
+    for i in 0..s.len() - 1 {
+        if s[i] == s[i + 1] {
+            return false;
+        }
+    }
+
+    true
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -126,6 +143,15 @@ mod tests {
 
         for case in test_cases {
             assert_eq!(is_unique_4(case.0), case.1);
+        }
+    }
+
+    #[test]
+    fn test_is_unique_5() {
+        let test_cases = gen_test_cases();
+
+        for case in test_cases {
+            assert_eq!(is_unique_5(case.0), case.1);
         }
     }
 }
