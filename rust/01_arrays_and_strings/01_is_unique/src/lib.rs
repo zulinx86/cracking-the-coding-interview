@@ -72,9 +72,9 @@ pub fn is_unique_4(s: &str) -> bool {
     for c in s.chars() {
         if set.contains(&c) {
             return false;
-        } else {
-            set.insert(c);
         }
+        
+        set.insert(c);
     }
 
     true
