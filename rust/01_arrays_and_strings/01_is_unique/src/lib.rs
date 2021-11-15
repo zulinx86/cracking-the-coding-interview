@@ -1,5 +1,8 @@
+//! Check if characters in a given string slice are unique.
 
-/// Check if characters in a given string slice are unique.
+use std::collections::HashSet;
+
+/// Brute force algorithm.
 ///
 /// - Time complexity: O(N^2)
 /// - Space complexity: O(1)
@@ -18,7 +21,8 @@ pub fn is_unique_1(s: &str) -> bool {
     true
 }
 
-/// Check if characters in a given string slice are unique.
+/// Uses an array which checks if the character has already appeared.
+///
 /// Only ASCII characters are acceptible. If it takes non-ASCII characters, it will panic with
 /// `index out of bounds`.
 ///
@@ -38,7 +42,8 @@ pub fn is_unique_2(s: &str) -> bool {
     true
 }
 
-/// Check if characters in a given string slice are unique.
+/// Uses a bit checker (`u128`) where each bit means whether a character has already appeared.
+///
 /// Only ASCII characters are acceptible. If it takes non-ASCII characters, it may output incorrect
 /// answer.
 ///
@@ -52,6 +57,24 @@ pub fn is_unique_3(s: &str) -> bool {
         }
 
         bit_for_check |= 1u128 << (c as u8);
+    }
+
+    true
+}
+
+/// Uses a hash set which has characters previously appeared.
+///
+/// - Time complexity: O(N)
+/// - Space complexity: O(N)
+pub fn is_unique_4(s: &str) -> bool {
+    let mut set = HashSet::new();
+
+    for c in s.chars() {
+        if set.contains(&c) {
+            return false;
+        } else {
+            set.insert(c);
+        }
     }
 
     true
@@ -93,6 +116,15 @@ mod tests {
 
         for case in test_cases {
             assert_eq!(is_unique_3(case.0), case.1);
+        }
+    }
+
+    #[test]
+    fn test_is_unique_4() {
+        let test_cases = gen_test_cases();
+
+        for case in test_cases {
+            assert_eq!(is_unique_4(case.0), case.1);
         }
     }
 }
