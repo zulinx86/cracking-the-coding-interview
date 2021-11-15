@@ -7,6 +7,7 @@ use std::collections::HashSet;
 ///
 /// - Time complexity: O(N^2)
 /// - Space complexity: O(1)
+/// - where N is the length of the given string
 pub fn is_unique_1(s: &str) -> bool {
     let n = s.len();
     let s = s.as_bytes();
@@ -29,6 +30,7 @@ pub fn is_unique_1(s: &str) -> bool {
 ///
 /// - Time complexity: O(N)
 /// - Space complexity: O(1)
+/// - where N is the length of the given string
 pub fn is_unique_2(s: &str) -> bool {
     let mut cnt: [bool; 128] = [false; 128];
 
@@ -50,6 +52,7 @@ pub fn is_unique_2(s: &str) -> bool {
 ///
 /// - Time complexity: O(N)
 /// - Space complexity: O(1)
+/// - where N is the length of the given string
 pub fn is_unique_3(s: &str) -> bool {
     let mut bit_for_check: u128 = 0;
     for c in s.chars() {
@@ -67,6 +70,7 @@ pub fn is_unique_3(s: &str) -> bool {
 ///
 /// - Time complexity: O(N)
 /// - Space complexity: O(N)
+/// - where N is the length of the given string
 pub fn is_unique_4(s: &str) -> bool {
     let mut set = HashSet::new();
 
@@ -85,6 +89,7 @@ pub fn is_unique_4(s: &str) -> bool {
 ///
 /// - Time complexity: O(N log N)
 /// - Space complexity: O(N)
+/// - where N is the length of the given string
 pub fn is_unique_5(s: &str) -> bool {
     let mut s: Vec<_> = s.chars().collect();
     s.sort();
