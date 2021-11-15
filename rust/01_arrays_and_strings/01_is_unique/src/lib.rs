@@ -1,4 +1,5 @@
-//! Check if characters in a given string slice are unique.
+//! Problem: Implement an algorithm to determine if a string has all unique characters. What if you cannot
+//! additional data structures?
 
 use std::collections::HashSet;
 
