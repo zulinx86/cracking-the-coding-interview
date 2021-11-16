@@ -116,7 +116,7 @@ mod tests {
     }
 
     fn gen_test_cases() -> [TestCase; 3] {
-        return [
+        [
             TestCase {
                 input: Input {
                     s1: "hello",
@@ -138,7 +138,7 @@ mod tests {
                 },
                 output: true,
             },
-        ];
+        ]
     }
 
     #[test]

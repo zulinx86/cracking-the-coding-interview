@@ -113,11 +113,11 @@ mod tests {
     }
 
     fn gen_test_cases() -> [TestCase; 3] {
-        return [
+        [
             TestCase { input: "hello", output: false }, /* becuase 'l' is duplicate */
             TestCase { input: "world", output: true },
             TestCase { input: "a b c", output: false }, /* because ' ' is duplicate */
-        ];
+        ]
     }
 
     #[test]
