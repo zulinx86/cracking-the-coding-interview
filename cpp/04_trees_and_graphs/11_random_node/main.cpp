@@ -56,7 +56,7 @@ public:
 			return;
 		}
 
-		// search a node to be the parent of the new node
+		// Search a node to be the parent of `n`.
 		curr = _root;
 		while (curr) {
 			if (curr->val == val) {
@@ -75,7 +75,7 @@ public:
 			}
 		}
 
-		// update the links
+		// Update links of `n` and `curr`.
 		n->parent = curr;
 		if (val < curr->val)
 			curr->left = n;
@@ -92,52 +92,65 @@ public:
 
 		p = n - &_v[0];
 
-		if (!n->left && !n->right) {
-			if (n->parent) {
+		if (!n->left && !n->right) {	// 1. No left, no right.
+			if (n->parent) {	// 1.1. Parent exists.
 				if (n->val < n->parent->val)
 					n->parent->left = NULL;
 				else
 					n->parent->right = NULL;
-			} else {
+			} else {		// 1.2. No parent.
 				_root = NULL;
 			}
-		} else if (!n->left) {
-			if (n->parent) {
-				n->right->parent = n->parent;
+		} else if (!n->left) {		// 2. No left, right exists.
+			if (n->parent) {	// 2.1. Parent exists.
+				if (n->right)
+					n->right->parent = n->parent;
+
 				if (n->val < n->parent->val)
 					n->parent->left = n->right;
 				else
 					n->parent->right = n->right;
-			} else {
+			} else {		// 2.2. No parent.
 				_root = n->right;
 			}
-		} else {
+		} else {			// 3. Left exists.
+			// Get the largest node (`curr`) within the left sub-tree of `n`.
+			// To achieve this, go down until `curr` doesn't have the right node.
 			curr = n->left;
 			while (curr->right)
 				curr = curr->right;
 
-			if (n->left == curr) {
+			if (n->left == curr) {	// 3.1. No nodes between `n` and `curr`
 				n->left = curr->left;
 				if (curr->left)
 					curr->left->parent = n;
-			} else {
+			} else {		// 3.2. Some nodes exist between `n` and `curr`
 				curr->parent->right = curr->left;
 				if (curr->left)
 					curr->left->parent = curr->parent;
 			}
 
-			p = curr - &_v[0];
+			// `curr->val` is copied to `n->val` and `curr` will be deleted.
 			n->val = curr->val;
+			p = curr - &_v[0];
 		}
 
+		// Delete a node `_v[_p]` which is the last element of `_v`.
 		_p--;
 		_v[p] = _v[_p];
+
 		if (_v[_p].parent) {
 			if (_v[_p].val < _v[_p].parent->val)
 				_v[_p].parent->left = &_v[p];
 			else
 				_v[_p].parent->right = &_v[p];
 		}
+
+		if (_v[_p].left)
+			_v[_p].left->parent = &_v[p];
+
+		if (_v[_p].right)
+			_v[_p].right->parent = &_v[p];
 	}
 
 	struct node *find(int val) {
@@ -147,6 +160,10 @@ public:
 	struct node *get_random_node() {
 		uniform_int_distribution<int> uni_rand(0, _p - 1);
 		return &_v[uni_rand(_mt)];
+	}
+
+	unsigned int size() {
+		return _p;
 	}
 
 private:
@@ -184,13 +201,13 @@ private:
 
 int main(void)
 {
-	int i, n;
+	unsigned int i, n;
 	cin >> n;
 
 	binary_search_tree bst;
 
 	for (i = 0; i < n; ++i) {
-		int act, v;
+		unsigned int act, v, j;
 
 		cin >> act >> v;
 
@@ -206,10 +223,13 @@ int main(void)
 		cout << "internal: ";
 		bst.show_internal();
 
-		cout << "sorted  : ";
+		cout << "traverse: ";
 		bst.show();
 
-		cout << "random  : " << bst.get_random_node()->val << endl;
+		cout << "random  : ";
+		for (j = 0; j < bst.size(); ++j)
+			cout << bst.get_random_node()->val << " ";
+		cout << endl;
 	}
 
 	return 0;
