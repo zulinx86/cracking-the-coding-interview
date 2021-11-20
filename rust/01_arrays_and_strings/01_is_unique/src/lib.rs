@@ -120,48 +120,34 @@ mod tests {
         ]
     }
 
+    fn test_is_unique(f: fn(&str) -> bool) {
+        for c in gen_test_cases() {
+            assert_eq!(f(c.input), c.output);
+        }
+    }
+
     #[test]
     fn test_is_unique_1() {
-        let test_cases = gen_test_cases();
-
-        for c in test_cases {
-            assert_eq!(is_unique_1(c.input), c.output);
-        }
+        test_is_unique(is_unique_1);
     }
 
     #[test]
     fn test_is_unique_2() {
-        let test_cases = gen_test_cases();
-
-        for c in test_cases {
-            assert_eq!(is_unique_2(c.input), c.output);
-        }
+        test_is_unique(is_unique_2);
     }
 
     #[test]
     fn test_is_unique_3() {
-        let test_cases = gen_test_cases();
-
-        for c in test_cases {
-            assert_eq!(is_unique_3(c.input), c.output);
-        }
+        test_is_unique(is_unique_3);
     }
 
     #[test]
     fn test_is_unique_4() {
-        let test_cases = gen_test_cases();
-
-        for c in test_cases {
-            assert_eq!(is_unique_4(c.input), c.output);
-        }
+        test_is_unique(is_unique_4);
     }
 
     #[test]
     fn test_is_unique_5() {
-        let test_cases = gen_test_cases();
-
-        for c in test_cases {
-            assert_eq!(is_unique_5(c.input), c.output);
-        }
+        test_is_unique(is_unique_5);
     }
 }

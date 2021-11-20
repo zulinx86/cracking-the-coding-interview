@@ -62,9 +62,7 @@ mod tests {
 
     #[test]
     fn test_urlify() {
-        let test_cases = gen_test_cases();
-
-        for mut c in test_cases {
+        for mut c in gen_test_cases() {
             urlify(&mut c.input.s, c.input.last);
             assert_eq!(c.input.s, c.output);
         }

@@ -76,21 +76,19 @@ mod tests {
         ]
     }
 
-    #[test]
-    fn test_palindrome_permutation_1() {
-        let test_cases = gen_test_cases();
-
-        for c in test_cases {
-            assert_eq!(palindrome_permutation_1(c.input), c.output);
+    fn test_palindrome_permutation(f: fn(&str) -> bool) {
+        for c in gen_test_cases() {
+            assert_eq!(f(c.input), c.output);
         }
     }
 
     #[test]
-    fn test_palindrome_permutation_2() {
-        let test_cases = gen_test_cases();
+    fn test_palindrome_permutation_1() {
+        test_palindrome_permutation(palindrome_permutation_1);
+    }
 
-        for c in test_cases {
-            assert_eq!(palindrome_permutation_2(c.input), c.output);
-        }
+    #[test]
+    fn test_palindrome_permutation_2() {
+        test_palindrome_permutation(palindrome_permutation_2);
     }
 }

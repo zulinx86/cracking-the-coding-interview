@@ -141,30 +141,24 @@ mod tests {
         ]
     }
 
+    fn test_check_permutation(f: fn(&str, &str) -> bool) {
+        for c in gen_test_cases() {
+            assert_eq!(f(c.input.s1, c.input.s2), c.output);
+        }
+    }
+
     #[test]
     fn test_check_permutation_1() {
-        let test_cases = gen_test_cases();
-
-        for c in test_cases {
-            assert_eq!(check_permutation_1(c.input.s1, c.input.s2), c.output);
-        }
+        test_check_permutation(check_permutation_1);
     }
 
     #[test]
     fn test_check_permutation_2() {
-        let test_cases = gen_test_cases();
-
-        for c in test_cases {
-            assert_eq!(check_permutation_2(c.input.s1, c.input.s2), c.output);
-        }
+        test_check_permutation(check_permutation_2);
     }
 
     #[test]
     fn test_check_permutation_3() {
-        let test_cases = gen_test_cases();
-
-        for c in test_cases {
-            assert_eq!(check_permutation_3(c.input.s1, c.input.s2), c.output);
-        }
+        test_check_permutation(check_permutation_3);
     }
 }
