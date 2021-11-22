@@ -1,8 +1,3 @@
-//! Problem: Implement a method to perform basic string compression using the counts of repeated
-//! characters. For example, the string aabcccccaaa would become a2b1c5a3. If the "compressed"
-//! string would not become smaller than the original string, your method should return the
-//! original string. You can assume the string has only uppercase and lowercase letters (a-z).
-
 #[derive(Debug)]
 struct Pair {
     c: char,
@@ -10,6 +5,10 @@ struct Pair {
 }
 
 /// Returns the run length like compressed string only it is shorter than the original string.
+///
+/// - Time complexity: O(N)
+/// - Space complexity: O(N)
+/// - where N is the length of the given string
 pub fn string_compression(s: &str) -> String {
     // Calculate the length of the compressed string.
     // If the length of the compressed string is longer than or equal to that of the original one,
