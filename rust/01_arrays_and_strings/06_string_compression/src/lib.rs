@@ -11,11 +11,16 @@ struct Pair {
 
 /// Returns the run length like compressed string only it is shorter than the original string.
 pub fn string_compression(s: &str) -> String {
-    // calculate the length of the compressed string
+    // Calculate the length of the compressed string.
+    // If the length of the compressed string is longer than or equal to that of the original one,
+    // return the original one.
     let mut comp_len = 0;
     let mut pair: Option<Pair> = None;
     for c in s.chars() {
         match pair {
+            None => {
+                pair = Some(Pair { c: c, n: 1 });
+            },
             Some(ref mut v) => {
                 if v.c != c {
                     comp_len += 1 + get_num_digits(v.n);
@@ -24,25 +29,24 @@ pub fn string_compression(s: &str) -> String {
                     v.n += 1;
                 }
             },
-            None => {
-                pair = Some(Pair{ c: c, n: 1 });
-            }
         }
     }
     if let Some(v) = pair {
         comp_len += 1 + get_num_digits(v.n);
     }
 
-    // if the length of the compressed string is longer than that of the given string, return the
-    // given string.
     if comp_len >= s.len() {
         return s.to_string();
     }
 
+    // create the compressed string because its length is shorter than the original one.
     let mut comp = String::with_capacity(comp_len);
     pair = None;
     for c in s.chars() {
         match pair {
+            None => {
+                pair = Some(Pair { c: c, n: 1 });
+            },
             Some(ref mut v) => {
                 if v.c != c {
                     comp.push(v.c);
@@ -52,9 +56,6 @@ pub fn string_compression(s: &str) -> String {
                     v.n += 1;
                 }
             },
-            None => {
-                pair = Some(Pair { c: c, n: 1 });
-            }
         }
     }
     if let Some(v) = pair {
