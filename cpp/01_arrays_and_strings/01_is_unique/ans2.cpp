@@ -1,4 +1,6 @@
 /*
+ * Use a flag which checks whether the character appeared previously.
+ *
  * N: the length of the given string
  * Time complexity: O(N)
  * Space complexity: O(1)
@@ -10,17 +12,17 @@
 
 using namespace std;
 
-bool isUnique(const string &str)
+bool is_unique(const string &str)
 {
-	if (str.length() > 256)
+	if (str.length() > 128)
 		return false;
 
-	bool flags[256] = { false };
-	for (int i = 0; i < str.length(); ++i) {
-		if (flags[str[i]])
+	bool flags[128] = { false };
+	for (const auto c : str) {
+		if (flags[(size_t)c])
 			return false;
 
-		flags[str[i]] = true;
+		flags[(size_t)c] = true;
 	}
 
 	return true;
@@ -30,8 +32,8 @@ int main(void)
 {
 	vector<string> inputs({"hello", "world"});
 
-	for (auto i : inputs)
-		cout << i << ": " << isUnique(i) << endl;
+	for (const auto &i : inputs)
+		cout << i << ": " << is_unique(i) << endl;
 
 	return 0;
 }
