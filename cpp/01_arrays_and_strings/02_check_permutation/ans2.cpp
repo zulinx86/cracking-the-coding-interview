@@ -1,4 +1,6 @@
 /*
+ * Count up how many times each character appears and then compare.
+ *
  * N: the length of the longer string in the given strings
  * Time complexity: O(N)
  * Space complexity: O(1)
@@ -11,18 +13,20 @@
 
 using namespace std;
 
-bool checkPermutation(const string &s1, const string &s2)
+bool check_permutation(const string &s1, const string &s2)
 {
 	if (s1.length() != s2.length())
 		return false;
 
-	int count[256] = {0};
-	for (auto s : s1)
-		++count[s];
-	for (auto s : s2)
-		--count[s];
+	int count[128] = {0};
 
-	for (int i = 0; i < 256; ++i) {
+	for (auto c : s1)
+		++count[(size_t)c];
+
+	for (auto c : s2)
+		--count[(size_t)c];
+
+	for (size_t i = 0; i < 128; ++i) {
 		if (count[i] != 0)
 			return false;
 	}
@@ -42,7 +46,7 @@ int main(void)
 
 	for (auto i : inputs)
 		cout << i.first << ", " << i.second << ": " <<
-			checkPermutation(i.first, i.second) << endl;
+			check_permutation(i.first, i.second) << endl;
 
 	return 0;
 }

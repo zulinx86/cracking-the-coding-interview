@@ -1,4 +1,6 @@
 /*
+ * Sort the two strings and then compare them in order from front.
+ *
  * N: the length of the longer string in the given strings
  * Time complexity: O(N log N)
  * Space complexity: O(1)
@@ -11,7 +13,7 @@
 
 using namespace std;
 
-bool checkPermutation(string s1, string s2)
+bool check_permutation(string s1, string s2)
 {
 	if (s1.length() != s2.length())
 		return false;
@@ -29,12 +31,12 @@ int main(void)
 		{"abcdefg", "adsfasd"},	// false
 		{"aabbccc", "aabcbcc"},	// true
 		{"aabbccc", "aabaccc"},	// false
-		{"aaa", "aaaa"},		// false
+		{"aaa", "aaaa"},	// false
 	});
 
-	for (auto i : inputs)
+	for (const auto &i : inputs)
 		cout << i.first << ", " << i.second << ": " <<
-			checkPermutation(i.first, i.second) << endl;
+			check_permutation(i.first, i.second) << endl;
 
 	return 0;
 }
