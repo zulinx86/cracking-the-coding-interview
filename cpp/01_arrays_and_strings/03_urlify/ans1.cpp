@@ -1,4 +1,6 @@
 /*
+ * Process from back to front.
+ *
  * N: the length of the given string
  * Time complexity: O(N)
  * Space complexity: O(1)
@@ -15,12 +17,12 @@ void urlify(string &str, int length)
 	int p = str.length() - 1;
 
 	for (int i = length - 1; i >= 0; --i) {
-		if (str[i] == ' ') {
-			str[p--] = '0';
-			str[p--] = '2';
-			str[p--] = '%';
+		if (str[(size_t)i] == ' ') {
+			str[(size_t)p--] = '0';
+			str[(size_t)p--] = '2';
+			str[(size_t)p--] = '%';
 		}
-		else str[p--] = str[i];
+		else str[(size_t)p--] = str[(size_t)i];
 	}
 }
 
@@ -32,9 +34,9 @@ int main(void) {
 	});
 
 	for (auto i : inputs) {
-		cout << i.first << ": ";
+		cout << "\"" << i.first << "\" -> \"";
 		urlify(i.first, i.second);
-		cout << i.first << endl;
+		cout << i.first << "\"" << endl;
 	}
 
 	return 0;
