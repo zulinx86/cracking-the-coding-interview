@@ -1,4 +1,7 @@
 /*
+ * Count up how many times each character appears and check if only one 
+ * character which appears odd number of times exists.
+ *
  * N: the length of the given string
  * Time complexity: O(N)
  * Space complexity: O(N)
@@ -11,23 +14,27 @@
 
 using namespace std;
 
-bool palindromePermutation(string str)
+bool is_lower_case_alphabet(char c) {
+	return 'a' <= c && c <= 'z';
+}
+
+bool palindrome_permutation(string str)
 {
 	unordered_map<char, int> mp;
 
-	for (int i = 0; i < str.length(); ++i) {
+	for (size_t i = 0; i < str.length(); ++i) {
 		char c = tolower(str[i]);
-		if (c == ' ') continue;
+		if (!is_lower_case_alphabet(c)) continue;
 		mp[c]++;
 	}
 
-	bool hasOdd = false;
+	bool has_odd = false;
 	for (auto itr = mp.begin(); itr != mp.end(); ++itr) {
 		if (itr->second % 2 == 1) {
-			if (hasOdd)
+			if (has_odd)
 				return false;
 			else
-				hasOdd = true;
+				has_odd = true;
 		}
 	}
 
@@ -37,10 +44,14 @@ bool palindromePermutation(string str)
 
 int main(void)
 {
-	vector<string> inputs({"Tact Coa", "Hello World", "aabbcc"});
+	vector<string> inputs({
+		"Tact Coa",	// true
+		"Hello World",	// false
+		"aabbcc"	// true
+	});
 
-	for (auto i : inputs)
-		cout << i << ": " << palindromePermutation(i) << endl;
+	for (const auto &i : inputs)
+		cout << i << ": " << palindrome_permutation(i) << endl;
 
 	return 0;
 }

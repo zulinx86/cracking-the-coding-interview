@@ -1,4 +1,6 @@
 /*
+ * Use a bit array to count up how many characters appears odd number of times.
+ *
  * N: the length of the given string
  * Time complexity: O(N)
  * Space complexity: O(1)
@@ -11,32 +13,40 @@
 
 using namespace std;
 
-bool palindromePermutation(string str)
-{
-	unsigned int bitVec = 0;
+bool is_lower_case_alphabet(char c) {
+	return 'a' <= c && c <= 'z';
+}
 
-	for (int i = 0; i < str.length(); ++i) {
+bool palindrome_permutation(string str)
+{
+	unsigned int bits = 0;
+
+	for (size_t i = 0; i < str.length(); ++i) {
 		char c = tolower(str[i]);
-		if (c == ' ')
+		if (!is_lower_case_alphabet(c))
 			continue;
 
-		unsigned int mask = 1 << c - 'a';
-		if (mask & bitVec)
-			bitVec &= ~mask;
+		unsigned int mask = 1 << (c - 'a');
+		if (mask & bits)
+			bits &= ~mask;
 		else
-			bitVec |= mask;
+			bits |= mask;
 	}
 
-	return (bitVec & (bitVec - 1)) == 0;
+	return (bits & (bits - 1)) == 0;
 }
 
 
 int main(void)
 {
-	vector<string> inputs({"Tact Coa", "Hello World", "aabbcc"});
+	vector<string> inputs({
+		"Tact Coa",	// true
+		"Hello World",	// false
+		"aabbcc"	// true
+	});
 
-	for (auto i : inputs)
-		cout << i << ": " << palindromePermutation(i) << endl;
+	for (const auto &i : inputs)
+		cout << i << ": " << palindrome_permutation(i) << endl;
 
 	return 0;
 }
