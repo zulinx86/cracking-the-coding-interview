@@ -1,5 +1,6 @@
 /*
- * Compare each character with characters in the rest part of the string.
+ * Compare each character with characters in the subsequent part of the given
+ * string.
  *
  * N: the length of the given string
  * Time complexity: O(N^2)
@@ -14,22 +15,19 @@ using namespace std;
 
 bool is_unique(const string &str)
 {
-	for (size_t i = 0; i < str.length(); ++i) {
-		for (size_t j = i + 1; j < str.length(); ++j) {
+	for (size_t i = 0; i < str.length(); ++i)
+		for (size_t j = i + 1; j < str.length(); ++j)
 			if (str[i] == str[j])
 				return false;
-		}
-	}
 
 	return true;
 }
 
 int main(void)
 {
-	vector<string> inputs({"hello", "world"});
+	string s;
+	cin >> s;
 
-	for (const auto &i : inputs)
-		cout << i << ": " << is_unique(i) << endl;
-
+	cout << is_unique(s) << endl;
 	return 0;
 }

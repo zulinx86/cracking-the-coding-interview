@@ -1,5 +1,5 @@
 /*
- * Use a bit array whose each bit means whether the character existed.
+ * Use a bit array where each bit means if the character appeared previously.
  *
  * Note:
  * The number of character types is limited to the size of the bit array.
@@ -20,12 +20,17 @@ using namespace std;
 
 bool is_unique(const string &str)
 {
-	int checker = 0;
-	for (const auto c : str) {
-		if (checker & (1 << (c - 'a')))
+	unsigned int flag = 0;
+	for (const char c : str) {
+		if (c < 'a' || 'z' < c) {
+			cerr << "Error: invalid input" << endl;
+			return false;
+		}
+
+		if (flag & (1 << (c - 'a')))
 			return false;
 
-		checker |= (1 << (c - 'a'));
+		flag |= (1 << (c - 'a'));
 	}
 
 	return true;
@@ -33,10 +38,9 @@ bool is_unique(const string &str)
 
 int main(void)
 {
-	vector<string> inputs({"hello", "world"});
+	string s;
+	cin >> s;
 
-	for (const auto &i : inputs)
-		cout << i << ": " << is_unique(i) << endl;
-
+	cout << is_unique(s) << endl;
 	return 0;
 }
