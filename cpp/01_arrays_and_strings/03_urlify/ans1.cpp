@@ -17,27 +17,22 @@ void urlify(string &str, int length)
 	int p = str.length() - 1;
 
 	for (int i = length - 1; i >= 0; --i) {
-		if (str[(size_t)i] == ' ') {
-			str[(size_t)p--] = '0';
-			str[(size_t)p--] = '2';
-			str[(size_t)p--] = '%';
+		if (str[i] == ' ') {
+			str[p--] = '0';
+			str[p--] = '2';
+			str[p--] = '%';
 		}
-		else str[(size_t)p--] = str[(size_t)i];
+		else str[p--] = str[i];
 	}
 }
 
+int main(void)
+{
+	string s;
+	getline(cin, s);
 
-int main(void) {
-	vector<pair<string, int>> inputs ({
-		{"My John Smith    ", 13},
-		{"Hello world  ", 11}
-	});
+	urlify(s, s.size());
 
-	for (auto i : inputs) {
-		cout << "\"" << i.first << "\" -> \"";
-		urlify(i.first, i.second);
-		cout << i.first << "\"" << endl;
-	}
-
+	cout << s << endl;
 	return 0;
 }
