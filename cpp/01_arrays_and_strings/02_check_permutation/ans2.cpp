@@ -7,7 +7,6 @@
  */
 
 #include <iostream>
-#include <vector>
 #include <string>
 #include <algorithm>
 
@@ -21,10 +20,10 @@ bool check_permutation(const string &s1, const string &s2)
 	int count[128] = {0};
 
 	for (auto c : s1)
-		++count[(size_t)c];
+		++count[c];
 
 	for (auto c : s2)
-		--count[(size_t)c];
+		--count[c];
 
 	for (size_t i = 0; i < 128; ++i) {
 		if (count[i] != 0)
@@ -36,17 +35,9 @@ bool check_permutation(const string &s1, const string &s2)
 
 int main(void)
 {
-	vector<pair<string, string>> inputs({
-		{"abcdefg", "cedfgba"},	// true
-		{"abcdefg", "adsfasd"},	// false
-		{"aabbccc", "aabcbcc"},	// true
-		{"aabbccc", "aabaccc"},	// false
-		{"aaa", "aaaa"},	// false
-	});
+	string s1, s2;
+	cin >> s1 >> s2;
 
-	for (auto i : inputs)
-		cout << i.first << ", " << i.second << ": " <<
-			check_permutation(i.first, i.second) << endl;
-
+	cout << check_permutation(s1, s2) << endl;
 	return 0;
 }
